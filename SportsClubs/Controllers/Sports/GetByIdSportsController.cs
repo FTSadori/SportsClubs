@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportsClubs.RestModels.Sports;
-using SportsClubsLib.Commands.Sports.Create;
-using SportsClubsLib.Commands.Sports.GetById;
-using SportsClubsLib.Commands.Sports.GetById.Validator;
+using SportsClubsLib.CQRS.Sport.Queries.GetById;
 using SportsClubsLib.Data.Entities;
+using SportsClubsLib.Dtos.Sport;
 
 namespace SportsClubs.Controllers.Sports
 {
@@ -12,22 +11,17 @@ namespace SportsClubs.Controllers.Sports
     [ApiExplorerSettings(GroupName = "sports")]
     public class GetByIdSportsController : ControllerBase
     {
-        private readonly IGetByIdSportsCommand _getbyidSports;
-        private readonly IGetByIdSportsValidator _getbyidValid;
+        private readonly IGetByIdSportQueryHandler _getbyidSport;
 
-        public GetByIdSportsController(IGetByIdSportsCommand getbyidSports, IGetByIdSportsValidator getbyidValid)
+        public GetByIdSportsController(IGetByIdSportQueryHandler getbyidSport)
         {
-            _getbyidSports = getbyidSports;
-            _getbyidValid = getbyidValid;
+            _getbyidSport = getbyidSport;
         }
 
         [HttpGet("{id:int}")]
-        public async Task<SportEntity?> GetById(int id)
+        public async Task<SportDto?> GetById(int id)
         {
-            if (!await _getbyidValid.Execute(id))
-                return null;
-
-            return await _getbyidSports.Execute(id);
+            return await _getbyidSport.Handle(new GetByIdSportQuery(id));
         }
     }
 }

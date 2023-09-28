@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SportsClubsLib.Commands.Award.Create.Validator;
-using SportsClubsLib.Commands.Award.Create;
 using SportsClubs.RestModels.Award;
+using SportsClubsLib.CQRS.Award.Commands.Create;
 
 namespace SportsClubs.Controllers.Award
 {
@@ -10,23 +9,19 @@ namespace SportsClubs.Controllers.Award
     [ApiExplorerSettings(GroupName = "awards")]
     public class CreateAwardController : ControllerBase
     {
-        private readonly ICreateAwardCommand _command;
-        private readonly ICreateAwardValidator _validator;
-
-        public CreateAwardController(ICreateAwardCommand command, ICreateAwardValidator validator)
+        private readonly ICreateAwardCommandHandler _command;
+        
+        public CreateAwardController(ICreateAwardCommandHandler command)
         {
             _command = command;
-            _validator = validator;
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateAwardRequest request)
         {
-            CreateAwardDto dto = new CreateAwardDto(request.Name, request.Year, request.ClubId);
-            if (!await _validator.Execute(dto))
-                return BadRequest();
-
-            await _command.Execute(dto);
+            CreateAwardCommand c = new(request.Name, request.Year, request.ClubId);
+            
+            await _command.Handle(c);
             return Ok();
         }
     }

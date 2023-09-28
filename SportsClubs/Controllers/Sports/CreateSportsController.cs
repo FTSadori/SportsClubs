@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportsClubs.RestModels.Sports;
-using SportsClubsLib.Commands.Sports.Create;
+using SportsClubsLib.CQRS.Sport.Commands.Create;
 
 namespace SportsClubs.Controllers.Sports
 {
@@ -9,9 +9,9 @@ namespace SportsClubs.Controllers.Sports
     [ApiExplorerSettings(GroupName = "sports")]
     public sealed class CreateSportsController : ControllerBase
     {
-        private readonly ICreateSportsCommand _createSports;
+        private readonly ICreateSportCommandHandler _createSports;
 
-        public CreateSportsController(ICreateSportsCommand createSports)
+        public CreateSportsController(ICreateSportCommandHandler createSports)
         {
             _createSports = createSports;
         }
@@ -19,8 +19,8 @@ namespace SportsClubs.Controllers.Sports
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateSportsRequest request)
         {
-            CreateSportsDto dto = new CreateSportsDto(request.Name);
-            await _createSports.Execute(dto);
+            CreateSportCommand c = new(request.Name);
+            await _createSports.Handle(c);
 
             return Ok();
         }
