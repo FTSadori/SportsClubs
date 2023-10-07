@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Controllers;
+using SportsClubs.RestModels.Validators;
 using SportsClubsLib.Extensions;
 using SportsClubsLib.Extensions.CQRS;
 
@@ -8,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder
     .Services
     .AddSportsClubsData("Server=WIN-00R1JQV3UDA\\SQLEXPRESS; Database=SPORTS_CLUBS; Trusted_connection=True; Encrypt=False")
-    .AddSQRS();
+    .AddSQRS()
+    .AddValidators();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
