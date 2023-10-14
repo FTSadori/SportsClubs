@@ -1,6 +1,6 @@
 ﻿namespace SportsClubsLib.Data.Entities
 {
-    public class SportEntity
+    public class SportEntity : IEntity
     {
         public int SportId { get; set; }
         public string Name { get; set; }
