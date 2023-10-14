@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FactoryMethod\Creators\ReportWriter\TxtReportWriter\" />
+    <Folder Include="FactoryMethod\Products\FileSector\TxtFileSector\" />
+  </ItemGroup>
+
 </Project>

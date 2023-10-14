@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportsClubsLib.CQRS.Club.Queries.GetById;
 using SportsClubsLib.Dtos.Club;
+using SportsClubsLib.FactoryMethod.Creators.ReportWriter.MdReportWriter;
 
 namespace SportsClubs.Controllers.Club
 {
