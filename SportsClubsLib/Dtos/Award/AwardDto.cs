@@ -1,6 +1,6 @@
 ﻿namespace SportsClubsLib.Dtos.Award
 {
-    public sealed record AwardDto
+    public sealed record AwardDto : IData
     {
         public string Name { get; set; }
         public int Year { get; set; }

@@ -4,7 +4,7 @@ using SportsClubsLib.Dtos.Member;
 
 namespace SportsClubsLib.Dtos.Club
 {
-    public sealed record ClubDto
+    public sealed record ClubDto : IData
     {
         public string Name { get; }
         public string Country { get; }

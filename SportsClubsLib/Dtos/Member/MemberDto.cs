@@ -1,6 +1,6 @@
 ﻿namespace SportsClubsLib.Dtos.Member
 {
-    public sealed record MemberDto
+    public sealed record MemberDto : IData
     {
         public string Name { get; set; }
         public string Surname { get; set; }
