@@ -14,7 +14,9 @@ namespace SportsClubsLib.FactoryMethod.Creators.ReportWriter.MdReportWriter
     {
         public override void RenderFile(IData entity)
         {
-            ClubDto club = entity as ClubDto ?? throw new ArgumentException("Given IEntity is not a ClubEntity");
+            ClubDto? club = entity as ClubDto;
+            if (club == null) { return; }
+
             Sectors.Add(new MdHeaderSector($"Спортивний клуб {club.Name}"));
             Sectors.Add(new MdClubInfoSector(club));
             Sectors.Add(new MdMembersTableSector(club));
