@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SportsClubsLib.CQRS.Club.Commands.Create;
+using SportsClubsLib.CQRS.Club.Queries.GetById;
 
 namespace SportsClubsLib.Extensions.CQRS
 {
@@ -9,6 +10,14 @@ namespace SportsClubsLib.Extensions.CQRS
         {
             services
                 .AddScoped<ICreateClubCommandHandler, CreateClubCommandHandler>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddClubQueries(this IServiceCollection services)
+        {
+            services
+                .AddScoped<IGetByIdClubQueryHandler, GetByIdClubQueryHandler>();
 
             return services;
         }
