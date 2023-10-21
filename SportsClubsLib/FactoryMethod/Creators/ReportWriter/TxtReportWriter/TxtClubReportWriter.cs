@@ -8,7 +8,9 @@ namespace SportsClubsLib.FactoryMethod.Creators.ReportWriter.TxtReportWriter
     {
         public override void RenderFile(IData entity)
         {
-            ClubDto club = entity as ClubDto ?? throw new ArgumentException("Given IEntity is not a ClubEntity");
+            ClubDto? club = entity as ClubDto;
+            if (club == null) return;
+
             Sectors.Add(new TxtHeaderSector($"Спортивний клуб {club.Name}"));
             Sectors.Add(new TxtClubInfoSector(club));
             Sectors.Add(new TxtMembersTableSector(club));

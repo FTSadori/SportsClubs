@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SportsClubs.RestModels.Club;
 using SportsClubsLib.CQRS.Club.Commands.Create;
 
-namespace SportsClubs.Controllers.Sports
+namespace SportsClubs.Controllers.Club.Create
 {
     [ApiController]
     [Route("clubs")]
@@ -34,7 +34,7 @@ namespace SportsClubs.Controllers.Sports
             }
 
             CreateClubCommand c = new(request.Name, request.Country, request.City, request.SportId);
-            
+
             await _command.Handle(c);
 
             return Ok();
