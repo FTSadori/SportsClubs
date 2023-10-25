@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SportsClubsLib.CQRS.Member.Commands.Create;
+using SportsClubsLib.CQRS.Member.Queries.LoadToMediator;
 
 namespace SportsClubsLib.Extensions.CQRS
 {
@@ -9,6 +10,14 @@ namespace SportsClubsLib.Extensions.CQRS
         {
             services
                 .AddScoped<ICreateMemberCommandHandler, CreateMemberCommandHandler>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddMemberQueries(this IServiceCollection services)
+        {
+            services
+                .AddScoped<ILoadToMediatorQueryHandler, LoadToMediatorQueryHandler>();
 
             return services;
         }
