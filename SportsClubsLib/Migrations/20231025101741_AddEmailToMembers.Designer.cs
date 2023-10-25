@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsClubsLib.Data;
 
@@ -10,9 +11,11 @@ using SportsClubsLib.Data;
 namespace SportsClubsLib.Migrations
 {
     [DbContext(typeof(SportsClubsDbContext))]
-    partial class SportsClubsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231025101741_AddEmailToMembers")]
+    partial class AddEmailToMembers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

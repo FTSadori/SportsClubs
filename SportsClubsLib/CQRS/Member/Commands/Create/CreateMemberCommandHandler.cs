@@ -14,7 +14,7 @@ namespace SportsClubsLib.CQRS.Member.Commands.Create
 
         public async Task Handle(CreateMemberCommand command)
         {
-            MemberEntity entity = new(command.Name, command.Surname, command.Patronymic, command.Position, command.ClubId);
+            MemberEntity entity = new(command.Name, command.Surname, command.Patronymic, command.Position, command.ClubId, command.Email);
 
             _context.Members.Add(entity);
 

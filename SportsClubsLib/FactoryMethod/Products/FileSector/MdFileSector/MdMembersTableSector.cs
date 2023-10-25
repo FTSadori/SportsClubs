@@ -23,13 +23,13 @@ namespace SportsClubsLib.FactoryMethod.Products.FileSector.MdFileSector
             string result = "";
 
             result += $"## Учасники клубу\n";
-            result += $"|№  |ПІБ                            |Роль              \n";
-            result += $"|---|-------------------------------|-----------------|\n";
+            result += $"|№  |ПІБ                            |Роль             |Email   |\n";
+            result += $"|---|-------------------------------|-----------------|--------|\n";
 
             for(int i = 0; i < Club.Members.Count; ++i)
             {
                 MemberDto mem = Club.Members[i];
-                result += $"|{i + 1}|{mem.Surname} {mem.Name} {mem.Patronymic}|{mem.Position}|\n";
+                result += $"|{i + 1}|{mem.Surname} {mem.Name} {mem.Patronymic}|{mem.Position}|{mem.Email}\n";
             }
 
             return result;

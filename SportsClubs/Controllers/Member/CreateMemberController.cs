@@ -32,7 +32,7 @@ namespace SportsClubs.Controllers.Member
                 return BadRequest(validationResult.Errors
                     .Select(e => new { e.PropertyName, e.ErrorMessage }));
             }
-            CreateMemberCommand dto = new(request.Name, request.Surname, request.Patronymic, request.Position, request.ClubId);
+            CreateMemberCommand dto = new(request.Name, request.Surname, request.Patronymic, request.Position, request.ClubId, request.Email);
             
             await _command.Handle(dto);
             return Ok();
