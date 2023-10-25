@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SportsClubsLib.CoR.Handlers
 {
-    public class ClubHandler : AbstractHandler
+    public sealed class ClubHandler : AbstractHandler
     {
         private readonly SportsClubsDbContext _context;
 
@@ -17,13 +17,13 @@ namespace SportsClubsLib.CoR.Handlers
             _context = context;
         }
 
-        public override void Handle()
+        public override async void Handle()
         {
             var clubs = _context.Clubs.ToList();
             foreach (var club in clubs)
                 _context.Clubs.Remove(club);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             base.Handle();
         }

@@ -31,7 +31,7 @@ namespace SportsClubs.Controllers.Club.Create
         {
             CreateClubBySportHelper helper = new CreateClubBySportHelper(_command, _query, _validator);
 
-            return await helper.Execute(request, new FootballClubBuilder());
+            return (await helper.Execute(request, new FootballClubBuilder())) ? Ok() : BadRequest();
         }
     }
 }

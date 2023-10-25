@@ -17,14 +17,14 @@ namespace SportsClubsLib.CoR.Handlers
             _context = context;
         }
 
-        public override void Handle()
+        public override async void Handle()
         {
             var sports = _context.Sports.ToList();
             foreach (var sport in sports)
                 _context.Sports.Remove(sport);
 
-            _context.SaveChanges();
-
+            await _context.SaveChangesAsync();
+            
             base.Handle();
         }
     }

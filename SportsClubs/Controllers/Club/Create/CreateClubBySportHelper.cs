@@ -27,15 +27,15 @@ namespace SportsClubs.Controllers.Club.Create
             _validator = validator;
         }
 
-        public async Task<IActionResult> Execute(CreateBySportClubRequest request, IClubBuilderBySport builder)
+        public async Task<bool> Execute(CreateBySportClubRequest request, IClubBuilderBySport builder)
         {
             IClubDirector director = new ClubDirector(builder);
 
             ClubProduct? clubProduct = director.Make(request.Name, request.Country, request.City) as ClubProduct;
-            if (clubProduct == null) { return new BadRequestResult(); }
+            if (clubProduct == null) { return false; }
 
             int sportId = await _query.Handle(new GetByNameSportQuery(clubProduct.Sport)) ?? -1;
-            if (sportId == -1) { return new NotFoundResult(); }
+            if (sportId == -1) { return false; }
 
             CreateClubRequest fullRequest = new CreateClubRequest(clubProduct.Name, clubProduct.Country, clubProduct.City, sportId);
 
@@ -43,14 +43,14 @@ namespace SportsClubs.Controllers.Club.Create
 
             if (!validationResult.IsValid)
             {
-                return new BadRequestResult();
+                return false;
             }
 
             CreateClubCommand c = new(fullRequest.Name, fullRequest.Country, fullRequest.City, fullRequest.SportId);
 
             await _command.Handle(c);
 
-            return new OkResult();
+            return true;
         }
     }
 }
