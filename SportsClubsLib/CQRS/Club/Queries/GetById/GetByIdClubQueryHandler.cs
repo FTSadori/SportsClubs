@@ -29,7 +29,7 @@ namespace SportsClubsLib.CQRS.Club.Queries.GetById
                 List<MemberDto> membersDtos = new();
                 foreach (var member in members)
                 {
-                    membersDtos.Add(new MemberDto(member.Name, member.Surname, member.Patronymic, member.Position, e.Name));
+                    membersDtos.Add(new MemberDto(member.Name, member.Surname, member.Patronymic, member.Position, e.Name, member.Email));
                 }
 
                 var awards = await _context.Awards.Where(a => a.ClubId == e.ClubId).ToListAsync();

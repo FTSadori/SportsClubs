@@ -18,14 +18,14 @@ namespace SportsClubsLib.CoR.Handlers
             _context = context;
         }
 
-        public override void Handle()
+        public override async void Handle()
         {
             var awards = _context.Awards.ToList();
             foreach (var award in awards)
                 _context.Awards.Remove(award);
-
-            _context.SaveChanges();
-
+            
+            await _context.SaveChangesAsync();
+            
             base.Handle();
         }
     }

@@ -9,16 +9,19 @@
 
         public string Position { get; set; }
 
+        public string Email { get; set; }
+
         public int ClubId { get; set; }
         public virtual ClubEntity ClubEntity { get; set; }
 
-        public MemberEntity(string name, string surname, string patronymic, string position, int clubId)
+        public MemberEntity(string name, string surname, string patronymic, string position, int clubId, string email)
         {
             Name = name;
             Surname = surname;
             Patronymic = patronymic;
             Position = position;
             ClubId = clubId;
+            Email = email;
         }
     }
 }

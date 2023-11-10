@@ -26,7 +26,7 @@ namespace SportsClubsLib.FactoryMethod.Products.FileSector.TxtFileSector
             for (int i = 0; i < Club.Members.Count; ++i)
             {
                 MemberDto mem = Club.Members[i];
-                result += $"{i + 1}. {mem.Surname} {mem.Name} {mem.Patronymic} ({mem.Position})\n";
+                result += $"{i + 1}. {mem.Surname} {mem.Name} {mem.Patronymic} ({mem.Position}) Email: {mem.Email}\n";
             }
             result += '\n';
 

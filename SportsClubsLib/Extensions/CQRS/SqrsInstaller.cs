@@ -12,6 +12,7 @@ namespace SportsClubsLib.Extensions.CQRS
                 .AddClubCommands()
                 .AddClubQueries()
                 .AddMemberCommands()
+                .AddMemberQueries()
                 .AddAwardCommands();
 
             return services;
